@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nery.LearningSpringBoot.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class Order implements Serializable{
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
+	
 	private OrderStatus status;
 	
 	@ManyToOne
@@ -33,9 +35,10 @@ public class Order implements Serializable{
 	
 	public Order() {}
 	
-	public Order(Instant moment, User client) {
+	public Order(Instant moment, User client,OrderStatus status) {
 		this.moment = moment;
 		this.client = client;
+		this.status = status;
 	}
 
 	public Long getId() {
